@@ -9,24 +9,19 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
-from sklearn.model_selection import train_test_split
-from azureml.core import Workspace, Dataset
+from azureml.core import Dataset
 
-subscription_id = 'f5091c60-1c3c-430f-8d81-d802f6bf2414'
-resource_group = 'aml-quickstarts-132780'
-workspace_name = 'quick-starts-ws-132780'
+ds= TabularDatasetFactory.from_delimited_files(path="https://raw.githubusercontent.com/gpriya32/nd00333-capstone/master/starter_file/heart_failure_clinical_records_dataset.csv")
 
-workspace = Workspace(subscription_id, resource_group, workspace_name)
+def clean_data(data):
+   
+    x_df = data.to_pandas_dataframe().dropna()
+    y_df = x_df.pop("DEATH_EVENT")
+    return x_df, y_df
 
-ds = Dataset.get_by_name(workspace, name='heart_failure')
-ds.to_pandas_dataframe()
+x, y = clean_data(ds)
 
-
-x=ds[:,:-1]
-y=ds[:,-1]
-
-# TODO: Split data into train and test sets.
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=1)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=42)
 
 run = Run.get_context()
 
@@ -42,14 +37,15 @@ def main():
     run.log("Regularization Strength:", np.float(args.C))
     run.log("Max iterations:", np.int(args.max_iter))
 
+   
+
     model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
 
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
-
-     # dumps the run
     os.makedirs('outputs', exist_ok=True)
-    joblib.dump(model,'outputs/model.joblib')
+    # note file saved in the outputs folder is automatically uploaded into experiment record
+    joblib.dump(value=model, filename='outputs/hypermodel.pkl')
 
 if __name__ == '__main__':
     main()
