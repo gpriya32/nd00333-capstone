@@ -54,11 +54,8 @@ AutoML rapidly iterates over many combinations of algorithms and hyperparameters
  **Best run model** is **VotingEnsemble**(Best Run Id:  AutoML_6263dfa7-5f5f-4c49-a41d-906612c208c9_38) with a accuracy of **0.8561616161616162**.
 
 
-Azure AutoML machine learning provides charts and metrics, to identify overfitted and imbalanced data, and implements best practices to help mitigate them. Inorder to decrease this model bias and to improve model accuracy, **Class balancing of Data** and **Cross validation** is required.
-
-
 **AutoML Run Widget Details**
-
+![](./aml/run_widget3.PNG)
 ![AutoML Run widget](./aml/run_widget2.PNG)
 ![](./aml/run_widget.PNG)
 
@@ -102,19 +99,22 @@ Accuracy: 0.8
 
 ```
 
-For scikit-learn pipeline, taking different range of values for hyperparameters (--C and --max-iter) or  using different Logistic Regression **solver** (such as  [‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’, ‘saga’]) will help in improving performance of model and choosing more robust model. Performing **Cross validation** in Scikit-Learn Pipeline will help in overcoming **overfitting of data** thus, improve performance of model in future.
-
 **HyperDrive Run Widget Details**
 
-![HyperDrive Run widget](./hyper/run_widget2.PNG)
-![](./hyper/run_widget.PNG)
+![HyperDrive Run widget](./hyper/run_widget.PNG)
+![](./hyper/run_widget2.PNG)
 ![](./hyper/hyper.PNG)
 
 **HyperDrive Best Run Details**
 
 ![HyperDrive Best run](./hyper/best_run.PNG)
 
+## Future work
 
+Azure AutoML machine learning provides charts and metrics, to identify overfitted and imbalanced data, and implements best practices to help mitigate them. Inorder to decrease this model bias and to improve model accuracy, **Class balancing of Data** and **Cross validation** is required.
+
+
+For scikit-learn pipeline, taking different range of values for hyperparameters (--C and --max-iter) or  using different Logistic Regression **solver** (such as  [‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’, ‘saga’]) will help in improving performance of model and choosing more robust model. Performing **Cross validation** in Scikit-Learn Pipeline will help in overcoming **overfitting of data** thus, improve performance of model in future.
 
 ## Model Deployment
 
