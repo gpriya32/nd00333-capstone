@@ -33,14 +33,14 @@ AutoML config has following parameters:
 | ----------------------------|:-----------------------|                                                      ---------------------------------:|
 |enable_early_stopping        |True                    | To enable early termination if the score is not improving in the short term|
 |max_concurrent_iterations    |5                      | To specify the maximum number of iterations that would be executed in parallel. | 
-|featurization                |auto                    | To specify wherether featurization should be done automically or not, auto is ued to do it automatically.| 
+|featurization                |auto                    | To specify whether featurization should be done automically or not, auto is used to do it automatically.| 
 |experiment_timeout_minutes   |30                    | To specify how long in minutes, our experiment should continue to run         |
-|task                         |classification                     | We are going to solve the classification problem| 
+|task                         |classification                     | Type of problem we need to solve is the classification problem| 
 |primary_metric               |accuracy                       | The metric that Automated Machine Learning will optimize for model selection. We are going to optimize the Accuracy.| 
-|compute_target               |compute_target                    | To run teh Automated Machine learning experiment, we are going to use remote created compute cluster | 
-|training_data                |ds                   | To specify wherether featurization should be done automically or not, auto is ued to do it automatically.| 
-|label_column_name            |DEATH_EVENT                  | This is the model value to predict, our lable column is 'Outcome'.| 
-|n_cross_validations          |3                    | How many cross validations to perform when user validation data is not specified.| 
+|compute_target               |compute_target                    | To run the Automated Machine learning experiment, we are going to use remote created compute cluster | 
+|training_data                |ds                   | Data that should be used for training the model | 
+|label_column_name            |DEATH_EVENT                  | This is the model value to predict, our lable column is 'DEATH_EVENT'.| 
+|n_cross_validations          |3                    | How many cross validations to perform | 
 |debug_log                    |automl_errors.log                    | The log file to write debug information|
 
 <br>
