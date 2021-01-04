@@ -93,10 +93,14 @@ The **best run model** for Hyperdrive (Best Run Id:) HD_90d16957-976c-41c5-ade7-
 
 Best Run Model and its hyperparameters:
 
-``['--C', '1.396527698242271', '--max_iter', '128']
-Best Run Id:  HD_90d16957-976c-41c5-ade7-5c9291bee04f_2``
+```
+['--C', '1.396527698242271', '--max_iter', '128']
 
-`Accuracy: 0.8`
+Best Run Id:  HD_90d16957-976c-41c5-ade7-5c9291bee04f_2
+
+Accuracy: 0.8
+
+```
 
 For scikit-learn pipeline, taking different range of values for hyperparameters (--C and --max-iter) or  using different Logistic Regression **solver** (such as  [‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’, ‘saga’]) will help in improving performance of model and choosing more robust model. Performing **Cross validation** in Scikit-Learn Pipeline will help in overcoming **overfitting of data** thus, improve performance of model in future.
 
