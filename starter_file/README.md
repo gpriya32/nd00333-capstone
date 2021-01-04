@@ -1,7 +1,7 @@
 
 # Capstone Project
 
-This project is part of the Udacity Azure ML Nanodegree. In this project, I have used Heart Failure Prediction dataset from Kaggle to build a classification model. It consist of two models: one using Automated ML and one customized model whose hyperparameters are tuned using HyperDrive. The performance of models are compared and deployed the best performing model as a webservice. 
+ Capstone project is part of the Udacity Azure ML Nanodegree. In this project, I have used Heart Failure Prediction dataset from Kaggle to build a classification model. It consist of two models: one using Automated ML and one customized model whose hyperparameters are tuned using HyperDrive. The performance of models are compared and deployed the best performing model as a webservice. 
 
 ## Project Workflow
 
@@ -116,12 +116,69 @@ For scikit-learn pipeline, taking different range of values for hyperparameters 
 
 The best model from HyperDrive experiment is of accuracy: 80% and the best model from Auto ML experiment is of accuracy: 85%. So, best model is the Automl run model with accuracy 85%. 
 
+- First of all, I have saved best run model as .pkl and registered in Azure studio. Also, wrote scoring script.
+- Created an ACI deployment configuration with key-based auth enabled.
+-  Configured InferenceConfig by providing the scoring script as entry script and environment 
+- Then Deployed the Model by providing the model, deployment-configuration (aciConfig) andd inference-configuration.
 
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+**Endpoint of Automl Run**
+
+![AutoMl](./aml/endpoint.PNG)
+
+**Endpoint of HyperDrive Run**
+
+![HyperDrive](./hyper/hyper_endpoint.PNG)
+
+- After deployment of the machine learning model as web-service, query the web-service-endpoint by sending the request to it.
+- The REST API expects the body of the request to be a JSON document. The following image shows the post-request sent and its output.
+
+**Rest-Call to the Endpoint**
+
+![](./request.PNG)
+
+Steps for querying the endpoint :
+
+- Require scoring uri, json data and primary key 
+- Json data (sample input) should be structured in the given format 
+
+```
+    data= { "data":
+        [
+            {
+                'age': 60,
+                'anaemia': 245,
+                'creatinine_phosphokinase': 0,
+                'diabetes': 0,
+                'ejection_fraction': 38,
+                'high_blood_pressure': 1,
+                'platelets': 163000,
+                'serum_creatinine': 50,
+                'serum_sodium':100,
+                'sex':1,
+                'smoking':1,
+                'time':7
+                
+                
+            }
+        ]
+        }
+    input_data = json.dumps(data)
+```
+- Create the header with key "Content-Type" and value "application/json" and also, set the value of Authorization with Bearer token and primary key.
+- Then, Post-request is sent to the web-servive and succesfull response is obtained.
+
 
 ## Screen Recording
 
-Drive link:
+Drive link : https://drive.google.com/file/d/1kglRuik2-XgjjgqpokO-HTkFxR11Qy0j/view?usp=sharing
 
 ## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+
+Enabled logging in deployed web app: Log useful data about requests being sent to the web-app.
+
+```
+service.update(enable_app_insights=True)
+```
+**Enabled Logging**
+
+![](./enablelogs.PNG)
